@@ -1,0 +1,30 @@
+/* Navbar specific styles */
+.navbar {
+    width: 100%;
+    background-color: #ffcc80;
+  }
+  
+  .navbar-nav {
+    align-items: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-item .nav-link {
+    padding-right: 20px;
+    color: white; 
+    font-weight: bold;
+  }
+  
+  .navbar-brand {
+    margin-right: auto;
+    color: white !important; 
+    font-weight: bold;
+  }
+  
+  @media (max-width: 992px) {
+    .navbar-nav {
+      margin-top: 10px;
+    }
+  }
+  

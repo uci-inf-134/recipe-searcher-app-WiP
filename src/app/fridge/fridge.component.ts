@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-fridge',
-  standalone: true,
-  imports: [],
   templateUrl: './fridge.component.html',
-  styleUrl: './fridge.component.css'
+  styleUrls: ['./fridge.component.css'],
+  imports: [NavbarComponent],
+  standalone: true
 })
-export class FridgeComponent {
-
-}
+export class FridgeComponent {}
