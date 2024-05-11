@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
 import { FridgeComponent } from './fridge/fridge.component';
 
-export const routes: Routes = [
+export const routes: Route[] = [
     { path: '', component: FridgeComponent }, 
 ];
