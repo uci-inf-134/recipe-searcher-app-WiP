@@ -1,6 +1,10 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { FridgeComponent } from './app/fridge/fridge.component';
-import { appConfig } from './app/app.config';
+import { bootstrapApplication } from "@angular/platform-browser";
+import { provideRouter } from "@angular/router";
+import { AppComponent } from "./app/app.component";
+import { routes } from "./app/app.routes";
 
-bootstrapApplication(FridgeComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+    providers: [
+        provideRouter(routes),
+    ]
+})

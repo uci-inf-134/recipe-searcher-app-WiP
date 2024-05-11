@@ -1,30 +1,40 @@
-/* Navbar specific styles */
-.navbar {
-    width: 100%;
-    background-color: #ffcc80;
-  }
-  
-  .navbar-nav {
-    align-items: center;
-    list-style: none;
-    padding: 0;
-  }
-  
-  .nav-item .nav-link {
-    padding-right: 20px;
-    color: white; 
-    font-weight: bold;
-  }
-  
-  .navbar-brand {
-    margin-right: auto;
-    color: white !important; 
-    font-weight: bold;
-  }
-  
-  @media (max-width: 992px) {
-    .navbar-nav {
-      margin-top: 10px;
-    }
-  }
-  
+#navbar {
+  background-color: #FFCC80;
+  width: 100%;
+  padding: 30px 20px;
+  /* idk idt this is how u do it but this fills in the awkward white borders, come back to this later */ 
+  margin-top: -20px;
+  margin-left: -16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* this styles recipe searcher */
+#navbar-brand {
+  text-decoration: none;
+  font-size: 36px;
+  color: rgb(0, 0, 0);
+  display: inline-block;
+}
+
+/* so we know when the "Recipe Searcher" is being hovered */
+#navbar-brand:hover {
+  color: rgb(83, 77, 77);
+  text-decoration: none;
+}
+
+/* this styles home, fridge, and recipes */
+.nav-link {
+  text-decoration: none;
+  font-size: 30px;
+  color: rgb(0, 0, 0);
+  padding: 0 30px; /* spacing between navbar items */
+  margin-right: 30px;
+  display: inline-block; 
+}
+
+.nav-link:hover {
+  color: rgb(83, 77, 77);
+  text-decoration: underline; 
+}
