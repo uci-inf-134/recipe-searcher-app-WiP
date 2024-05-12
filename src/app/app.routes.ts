@@ -4,7 +4,7 @@ import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { AppComponent } from './app.component';
 
 export const routes: Route[] = [
-    { path: '', component: AppComponent },
+    { path: '', component: FridgeComponent },
     { path: 'fridge', component: FridgeComponent },
     { path: 'recipe', component: RecipePageComponent }
 ];
