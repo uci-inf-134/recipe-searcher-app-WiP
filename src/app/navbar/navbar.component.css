@@ -1,10 +1,6 @@
 #navbar {
   background-color: #FFCC80;
-  width: 100%;
   padding: 30px 20px;
-  /* idk idt this is how u do it but this fills in the awkward white borders, come back to this later */ 
-  margin-top: -20px;
-  margin-left: -16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
