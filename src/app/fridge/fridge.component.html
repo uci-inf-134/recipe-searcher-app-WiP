@@ -1,32 +1,21 @@
 <app-navbar></app-navbar>
 <h1>Fridge page</h1>
 
-
-
 <div class="container">
     <div class="row align-items-start">
+        
         <div class="col" style="border: 5px solid grey">
             <h2> Your Fridge</h2>
-            <div class="card mb-3" style="width: 30rem;">
-                <div class="card-body">
-                    <h5 class = "card-text"> Carrot <span class="amount"> x10</span></h5>
-                    <footer> Expires: 10/10/24</footer>
+            <div *ngFor=" let inData of allIngredients"> 
+                <div class="card mb-3" style= "width: 30 rem">
+                    <div class="card-body">
+                        <h5 class = "card-text"> {{inData.ingredientName}} <span class="amount"> x{{inData.inventoryAmount}}</span></h5>
+                        <p class="card-text"><b>Expires: {{inData.expirationDate.toDateString()}}</b> </p>
+                        <footer><button type="button" class="btn btn-outline-danger">Remove</button> <button type="button" class="btn btn-outline-info"> Edit </button></footer>
+                    </div>
                 </div>
             </div>
-    
-            <div class="card mb-3" style="width: 30rem;">
-                <div class="card-body">
-                    <h5 class = "card-text"> Carrot <span class="amount"> x10</span></h5>
-                    <footer> Expires: 10/10/24</footer>
-                </div>
-            </div>
-    
-            <div class="card mb-3" style="width: 30rem;">
-                <div class="card-body">
-                    <h5 class = "card-text"> Carrot <span class="amount"> x10</span></h5>
-                    <footer> Expires: 10/10/24</footer>
-                </div>
-            </div>
+            
         </div>
 
         <div class="col"> 
@@ -38,6 +27,11 @@
                 <div class="mb-3">
                     <label for="ItemName" class="form-label">Item Name</label>
                     <input type="text" class="form-control" id="ItemNameInput" placeholder="E.g. Apple">
+                </div>
+
+                <div class="mb-3">
+                    <label for="ItemAmount" class="form-label">Amount</label>
+                    <input type="text" class="form-control" id="ItemNameInput" placeholder="E.g. 10">
                 </div>
                 
                 <div class="mb-3">
