@@ -1,60 +1,58 @@
 <app-navbar></app-navbar>
-<form class="search-bar">
-    <input type="text" placeholder="Search recipes...">
+
+<form class="search-bar" (ngSubmit)="searchByName()">
+    <input type="text" placeholder="Search recipes..." [(ngModel)]="query" name="query">
     <button type="submit">Search</button>
 </form>
+
 <div class="filters">
-    <select id="diet-type">
-        <option value="">Select Diet Type</option>
-        <option value="vegan">Vegan</option>
-        <option value="vegetarian">Vegetarian</option>
-        <option value="gluten-free">Gluten-Free</option>
+    <select id="category" [(ngModel)]="category" name="category" (change)="filterByCategory()">
+        <option value="">Select Category</option>
+        <option *ngFor="let category of categories" [value]="category.strCategory">{{ category.strCategory }}</option>
     </select>
-    <select id="cooking-time">
-        <option value="">Select Cooking Time</option>
-        <option value="under-30">Under 30 Minutes</option>
-        <option value="30-to-60">30 to 60 Minutes</option>
-        <option value="over-60">Over an Hour</option>
+    <select id="ingredient" [(ngModel)]="ingredient" name="ingredient" (change)="filterByIngredient()">
+        <option value="">Select Main Ingredient</option>
+        <option *ngFor="let ingredient of ingredients" [value]="ingredient.strIngredient">{{ ingredient.strIngredient }}</option>
     </select>
-    <select id="rating">
-        <option value="">Select Rating</option>
-        <option value="4">4 Stars & Up</option>
-        <option value="3">3 Stars & Up</option>
-    </select>
-    <input type="text" id="ingredient" placeholder="Include Ingredient">
 </div>
-<div class="recipe-title-card">
-    <div>
-        <h1>Cake</h1>
-        <h2>This is a good food that make you go yum.</h2>
+
+<div *ngFor="let recipe of recipes" class="recipe-title-card">
+    <div class="text-container">
+        <h1>{{ recipe.strMeal }}</h1>
         <div class="tag-list">
             <div class="recipe-tag">
-                <p>Vegan</p>
+                <p>Category: {{ recipe.strCategory }}</p>
+            </div>
+            <div class="recipe-tag">
+                <p>Tags: {{ recipe.strTags ? recipe.strTags.split(',').join(', ') : 'None' }}</p>
             </div>
         </div>
-        <h3>By <span class="text-underline">Som Cook</span></h3>
+        <button class="go-button" (click)="openModal(recipe)">Go</button>
     </div>
-    <div class="img-placeholder"></div>
+    <div class="img-placeholder">
+        <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}">
+    </div>
 </div>
-<div class="recipe-navbar">
-    <ul>
-        <li><a href="#ingredients">Ingredients</a></li>
-        <li><a href="#instructions">Instructions</a></li>
-    </ul>
-</div>
-<div class="recipe-ingredient-list" id="ingredients">
-    <h1>Ingredients List</h1>
-    <ul>
-        <li>Ingredient 1</li>
-        <li>Ingredient 2</li>
-        <li>Ingredient 3</li>
-    </ul>
-</div>
-<div class="recipe-instruction-list" id="instructions">
-    <h1>Cooking Instructions</h1>
-    <ol>
-        <li>Mix up ingredients</li>
-        <li>Cook the ingredients</li>
-        <li>c o n s u m e</li>
-    </ol>
+
+<div class="modal" [class.show]="isModalOpen" (click)="closeModal($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>{{ selectedRecipe?.strMeal }}</h2>
+        <div class="tab">
+            <button class="tablinks" (click)="openTab($event, 'Ingredients')">Ingredients</button>
+            <button class="tablinks" (click)="openTab($event, 'Instructions')">Instructions</button>
+        </div>
+        <div id="Ingredients" class="tabcontent">
+            <h3>Ingredients</h3>
+            <ul>
+                <li *ngFor="let ingredient of selectedRecipeIngredients">{{ ingredient }}</li>
+            </ul>
+        </div>
+        <div id="Instructions" class="tabcontent">
+            <h3>Instructions</h3>
+            <ol>
+                <li *ngFor="let instruction of selectedRecipeInstructions">{{ instruction }}</li>
+            </ol>
+        </div>
+    </div>
 </div>
