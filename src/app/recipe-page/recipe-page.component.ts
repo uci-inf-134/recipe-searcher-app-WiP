@@ -20,6 +20,8 @@ export class RecipePageComponent implements OnInit {
   query = '';
   category = '';
   ingredient = '';
+  isModalOpen = false;
+  selectedRecipe: Recipe | null = null;
 
   constructor(private recipeSearchService: RecipeSearchService) {}
 
@@ -36,7 +38,8 @@ export class RecipePageComponent implements OnInit {
   searchByName() {
     this.recipeSearchService.searchRecipesByName(this.query).subscribe(
       data => {
-        this.recipes = data.meals || [];
+        console.log(data);  // Verify the structure of your data here
+        this.recipes = data;
       },
       error => {
         console.error('Error fetching recipes', error);
@@ -47,7 +50,8 @@ export class RecipePageComponent implements OnInit {
   filterByIngredient() {
     this.recipeSearchService.filterByIngredient(this.ingredient).subscribe(
       data => {
-        this.recipes = data.meals || [];
+        console.log(data);  // Verify the structure of your data here
+        this.recipes = data;
       },
       error => {
         console.error('Error fetching recipes', error);
@@ -58,11 +62,25 @@ export class RecipePageComponent implements OnInit {
   filterByCategory() {
     this.recipeSearchService.filterByCategory(this.category).subscribe(
       data => {
-        this.recipes = data.meals || [];
+        console.log(data);  // Verify the structure of your data here
+        this.recipes = data;
       },
       error => {
         console.error('Error fetching recipes', error);
       }
     );
+  }
+
+  openModal(recipe: Recipe) {
+    this.selectedRecipe = recipe;
+    this.isModalOpen = true;
+  }
+
+  closeModal(event?: MouseEvent) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.isModalOpen = false;
+    this.selectedRecipe = null;
   }
 }

@@ -1,8 +1,10 @@
 <app-navbar></app-navbar>
+
 <form class="search-bar" (ngSubmit)="searchByName()">
     <input type="text" placeholder="Search recipes..." [(ngModel)]="query" name="query">
     <button type="submit">Search</button>
 </form>
+
 <div class="filters">
     <select id="category" [(ngModel)]="category" name="category" (change)="filterByCategory()">
         <option value="">Select Category</option>
@@ -15,53 +17,28 @@
 </div>
 
 <div *ngFor="let recipe of recipes" class="recipe-title-card">
-    <div>
+    <div class="text-container">
         <h1>{{ recipe.strMeal }}</h1>
-        <h2>{{ recipe.strInstructions }}</h2>
         <div class="tag-list">
             <div class="recipe-tag">
-                <p>{{ recipe.strCategory }}</p>
+                <p>Category: {{ recipe.strCategory }}</p>
+            </div>
+            <div class="recipe-tag">
+                <p>Tags: {{ recipe.strTags ? recipe.strTags.split(',').join(', ') : 'None' }}</p>
             </div>
         </div>
-        <h3>By <span class="text-underline">{{ recipe.strArea }}</span></h3>
+        <button class="go-button" (click)="openModal(recipe)">Go</button>
     </div>
     <div class="img-placeholder">
         <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}">
     </div>
 </div>
 
-<div class="recipe-title-card">
-    <div>
-        <h1>Cake</h1>
-        <h2>This is a good food that make you go yum.</h2>
-        <div class="tag-list">
-            <div class="recipe-tag">
-                <p>Vegan</p>
-            </div>
-        </div>
-        <h3>By <span class="text-underline">Som Cook</span></h3>
+<!-- Modal -->
+<div class="modal" [class.show]="isModalOpen" (click)="closeModal($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>{{ selectedRecipe?.strMeal }}</h2>
+        <p>{{ selectedRecipe?.strInstructions }}</p>
     </div>
-    <div class="img-placeholder"></div>
-</div>
-<div class="recipe-navbar">
-    <ul>
-        <li><a href="#ingredients">Ingredients</a></li>
-        <li><a href="#instructions">Instructions</a></li>
-    </ul>
-</div>
-<div class="recipe-ingredient-list" id="ingredients">
-    <h1>Ingredients List</h1>
-    <ul>
-        <li>Ingredient 1</li>
-        <li>Ingredient 2</li>
-        <li>Ingredient 3</li>
-    </ul>
-</div>
-<div class="recipe-instruction-list" id="instructions">
-    <h1>Cooking Instructions</h1>
-    <ol>
-        <li>Mix up ingredients</li>
-        <li>Cook the ingredients</li>
-        <li>c o n s u m e</li>
-    </ol>
 </div>

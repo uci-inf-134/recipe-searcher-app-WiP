@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 export interface Category {
   idCategory: string;
@@ -36,16 +37,30 @@ export class RecipeSearchService {
 
   constructor(private http: HttpClient) {}
 
-  searchRecipesByName(query: string): Observable<{ meals: Recipe[] }> {
-    return this.http.get<{ meals: Recipe[] }>(`${this.apiUrl}/search.php`, { params: { s: query } });
+  searchRecipesByName(query: string): Observable<Recipe[]> {
+    return this.http.get<{ meals: Recipe[] }>(`${this.apiUrl}/search.php`, { params: { s: query } })
+      .pipe(map(response => response.meals || []));
   }
 
-  filterByIngredient(ingredient: string): Observable<{ meals: Recipe[] }> {
-    return this.http.get<{ meals: Recipe[] }>(`${this.apiUrl}/filter.php`, { params: { i: ingredient } });
+  filterByIngredient(ingredient: string): Observable<Recipe[]> {
+    return this.http.get<{ meals: { idMeal: string }[] }>(`${this.apiUrl}/filter.php`, { params: { i: ingredient } })
+      .pipe(
+        map(response => response.meals || []),
+        switchMap(meals => forkJoin(meals.map(meal => this.getRecipeById(meal.idMeal))))
+      );
   }
 
-  filterByCategory(category: string): Observable<{ meals: Recipe[] }> {
-    return this.http.get<{ meals: Recipe[] }>(`${this.apiUrl}/filter.php`, { params: { c: category } });
+  filterByCategory(category: string): Observable<Recipe[]> {
+    return this.http.get<{ meals: { idMeal: string }[] }>(`${this.apiUrl}/filter.php`, { params: { c: category } })
+      .pipe(
+        map(response => response.meals || []),
+        switchMap(meals => forkJoin(meals.map(meal => this.getRecipeById(meal.idMeal))))
+      );
+  }
+
+  getRecipeById(id: string): Observable<Recipe> {
+    return this.http.get<{ meals: Recipe[] }>(`${this.apiUrl}/lookup.php`, { params: { i: id } })
+      .pipe(map(response => response.meals[0]));
   }
 
   getCategories(): Observable<{ categories: Category[] }> {
