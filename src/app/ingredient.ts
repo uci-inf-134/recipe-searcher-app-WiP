@@ -41,11 +41,28 @@ export class Ingredient{
     }
     get unitMeasure()
     {
-        return this.unitOfMeasurement
+        return this.unitOfMeasurement;
     }
     get expirationDate()
     {
         return this.expiration;
     }
    
+    set changeAmount(x: number)
+    {
+        this.fridgeAmount = x;
+    }
+    set setDetails(details: string)
+    {
+        this.description = details;
+    }
+   
+    set unitMeasure(measure:string)
+    {
+        this.unitOfMeasurement = measure;
+    }
+    set expirationDate(date:Date)
+    {
+        this.expirationDate = date;
+    }
 }
