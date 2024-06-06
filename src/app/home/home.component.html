@@ -1,2 +1,39 @@
 <app-navbar></app-navbar>
-Home page
+<h1 class="title">Welcome to Recipe Searcher!</h1>
+<form class="search-bar">
+    <input type="text" placeholder="Search recipes...">
+    <button type="submit">Search</button>
+</form>
+<div class="filters">
+    <select id="diet-type">
+        <option value="">Select Diet Type</option>
+        <option value="vegan">Vegan</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="gluten-free">Gluten-Free</option>
+    </select>
+    <select id="cooking-time">
+        <option value="">Select Cooking Time</option>
+        <option value="under-30">Under 30 Minutes</option>
+        <option value="30-to-60">30 to 60 Minutes</option>
+        <option value="over-60">Over an Hour</option>
+    </select>
+    <select id="rating">
+        <option value="">Select Rating</option>
+        <option value="4">4 Stars & Up</option>
+        <option value="3">3 Stars & Up</option>
+    </select>
+    <input type="text" id="ingredient" placeholder="Include Ingredient">
+</div>
+
+<div class = "container">
+    <div class="card" style="width: 25rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Cake <span class="badge rounded-pill text-bg-success">Vegan</span> <span class="badge rounded-pill text-bg-primary">30mins</span></h5>
+          <p class="card-text">This is a good food that make you go yum.</p>
+          <p class = "card-text"> By: Som Cook</p>
+          <a href="recipe" class="btn btn-primary">Let's cook!</a>
+        </div>
+    </div>
+
+</div>
