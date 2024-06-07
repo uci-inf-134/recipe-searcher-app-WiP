@@ -1,39 +1,62 @@
 <app-navbar></app-navbar>
-<h1 class="title">Welcome to Recipe Searcher!</h1>
-<form class="search-bar">
-    <input type="text" placeholder="Search recipes...">
+
+<h1>Homepage</h1>
+
+<form class="search-bar" (ngSubmit)="searchByName()">
+    <input type="text" placeholder="Search recipes..." [(ngModel)]="query" name="query">
     <button type="submit">Search</button>
 </form>
+
 <div class="filters">
-    <select id="diet-type">
-        <option value="">Select Diet Type</option>
-        <option value="vegan">Vegan</option>
-        <option value="vegetarian">Vegetarian</option>
-        <option value="gluten-free">Gluten-Free</option>
+    <select id="category" [(ngModel)]="category" name="category" (change)="filterByCategory()">
+        <option value="">Select Category</option>
+        <option *ngFor="let category of categories" [value]="category.strCategory">{{ category.strCategory }}</option>
     </select>
-    <select id="cooking-time">
-        <option value="">Select Cooking Time</option>
-        <option value="under-30">Under 30 Minutes</option>
-        <option value="30-to-60">30 to 60 Minutes</option>
-        <option value="over-60">Over an Hour</option>
+    <select id="ingredient" [(ngModel)]="ingredient" name="ingredient" (change)="filterByIngredient()">
+        <option value="">Select Main Ingredient</option>
+        <option *ngFor="let ingredient of ingredients" [value]="ingredient.strIngredient">{{ ingredient.strIngredient }}</option>
     </select>
-    <select id="rating">
-        <option value="">Select Rating</option>
-        <option value="4">4 Stars & Up</option>
-        <option value="3">3 Stars & Up</option>
-    </select>
-    <input type="text" id="ingredient" placeholder="Include Ingredient">
 </div>
 
-<div class = "container">
-    <div class="card" style="width: 25rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Cake <span class="badge rounded-pill text-bg-success">Vegan</span> <span class="badge rounded-pill text-bg-primary">30mins</span></h5>
-          <p class="card-text">This is a good food that make you go yum.</p>
-          <p class = "card-text"> By: Som Cook</p>
-          <a href="recipe" class="btn btn-primary">Let's cook!</a>
+<h1>Search Results</h1>
+<div *ngFor="let recipe of recipes" class="recipe-title-card">
+    <div class="text-container">
+        <h1>{{ recipe.strMeal }}</h1>
+        <div class="tag-list">
+            <div class="recipe-tag">
+                <p>Category: {{ recipe.strCategory }}</p>
+            </div>
+            <div class="recipe-tag">
+                <p>Tags: {{ recipe.strTags ? recipe.strTags.split(',').join(', ') : 'None' }}</p>
+            </div>
+        </div>
+        <button class="go-button" (click)="openModal(recipe)">Go</button>
+        <button class="save-button" (click)="saveRecipe(recipe)">Save</button>
+    </div>
+    <div class="img-placeholder">
+        <img [src]="recipe.strMealThumb" alt="{{ recipe.strMeal }}">
+    </div>
+</div>
+
+<div class="modal" [class.show]="isModalOpen" (click)="closeModal($event)">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>{{ selectedRecipe?.strMeal }}</h2>
+        <div class="tab">
+            <button class="tablinks" (click)="openTab($event, 'Ingredients')">Ingredients</button>
+            <button class="tablinks" (click)="openTab($event, 'Instructions')">Instructions</button>
+        </div>
+        <div id="Ingredients" class="tabcontent">
+            <h3>Ingredients</h3>
+            <ul>
+                <li *ngFor="let ingredient of selectedRecipeIngredients">{{ ingredient }}</li>
+            </ul>
+        </div>
+        <div id="Instructions" class="tabcontent">
+            <h3>Instructions</h3>
+            <ol>
+                <li *ngFor="let instruction of selectedRecipeInstructions">{{ instruction }}</li>
+            </ol>
         </div>
     </div>
-
 </div>

@@ -1,4 +1,9 @@
-/* Quamin's Search bar format */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-top: 20px;
+}
+
 .search-bar {
     display: flex;
     justify-content: center;
@@ -44,26 +49,89 @@
 }
 
 .recipe-title-card {
-    background-color: blanchedalmond;
-    padding: 25px 50px;
-    margin: 20px;
-    border-radius: 10px;
     display: flex;
-    align-items: center;
-
-    h1 {
-        margin: 0;
-        font-size: 48px;
-    }
-
-    .tag-list {
-        display: flex;
-    }
+    justify-content: space-between;
+    margin: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
 }
-/* End of Quamin's search Bar */
 
-.title
-{
-    text-align: center;
-    padding-top: 10px;
+.text-container {
+    max-width: 70%;
+}
+
+.img-placeholder img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.go-button,
+.save-button {
+    padding: 10px;
+    font-size: 1em;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    gap: 30px;
+}
+
+.go-button:hover,
+.save-button:hover {
+    background-color: #0056b3;
+}
+
+.go-button {
+    margin-right: 10px;
+}
+
+.modal {
+    display: none;
+}
+
+.modal.show {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.tab {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.tab button {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+}
+
+.tabcontent h3 {
+    margin-top: 0;
+}
+
+.tabcontent ul,
+.tabcontent ol {
+    margin-top: 10px;
 }
