@@ -1,6 +1,6 @@
 #navbar {
   background-color: #FFCC80;
-  padding: 30px 20px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,10 +27,19 @@
   color: rgb(0, 0, 0);
   padding: 0 30px; /* spacing between navbar items */
   margin-right: 30px;
-  display: inline-block; 
-}
+  display: inline-block;
 
-.nav-link:hover {
-  color: rgb(83, 77, 77);
-  text-decoration: underline; 
+  img {
+    position: relative;
+    right: 10px;
+    bottom: 4px;
+  }
+
+  &:hover {
+    color: rgb(83, 77, 77);
+    text-decoration: underline;
+  }
+  &:active {
+    color: black;
+  }
 }
