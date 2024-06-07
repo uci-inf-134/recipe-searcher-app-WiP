@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RecipeSearchService, Category, Ingredient, Recipe } from '../services/recipe-search.service';
+import { HttpClientModule } from '@angular/common/http';
+import { SavedRecipesService } from '../services/saved-recipes.service';
+import { Recipe } from '../services/recipe-search.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
@@ -10,64 +10,20 @@ import { NavbarComponent } from '../navbar/navbar.component';
   standalone: true,
   templateUrl: './recipe-page.component.html',
   styleUrls: ['./recipe-page.component.css'],
-  imports: [CommonModule, HttpClientModule, FormsModule, NavbarComponent],
-  providers: [RecipeSearchService]
+  imports: [CommonModule, HttpClientModule, NavbarComponent],
+  providers: [SavedRecipesService]
 })
 export class RecipePageComponent implements OnInit {
-  recipes: Recipe[] = [];
-  categories: Category[] = [];
-  ingredients: Ingredient[] = [];
-  query = '';
-  category = '';
-  ingredient = '';
+  savedRecipes: Recipe[] = [];
   isModalOpen = false;
   selectedRecipe: Recipe | null = null;
   selectedRecipeIngredients: string[] = [];
   selectedRecipeInstructions: string[] = [];
 
-  constructor(private recipeSearchService: RecipeSearchService) {}
+  constructor(private savedRecipesService: SavedRecipesService) {}
 
   ngOnInit() {
-    this.recipeSearchService.getCategories().subscribe(data => {
-      this.categories = data.categories;
-    });
-
-    this.recipeSearchService.getIngredients().subscribe(data => {
-      this.ingredients = data.meals;
-    });
-  }
-
-  searchByName() {
-    this.recipeSearchService.searchRecipesByName(this.query).subscribe(
-      data => {
-        this.recipes = data;
-      },
-      error => {
-        console.error('Error fetching recipes', error);
-      }
-    );
-  }
-
-  filterByIngredient() {
-    this.recipeSearchService.filterByIngredient(this.ingredient).subscribe(
-      data => {
-        this.recipes = data;
-      },
-      error => {
-        console.error('Error fetching recipes', error);
-      }
-    );
-  }
-
-  filterByCategory() {
-    this.recipeSearchService.filterByCategory(this.category).subscribe(
-      data => {
-        this.recipes = data;
-      },
-      error => {
-        console.error('Error fetching recipes', error);
-      }
-    );
+    this.savedRecipes = this.savedRecipesService.getSavedRecipes();
   }
 
   openModal(recipe: Recipe) {
@@ -86,6 +42,11 @@ export class RecipePageComponent implements OnInit {
     this.selectedRecipe = null;
     this.selectedRecipeIngredients = [];
     this.selectedRecipeInstructions = [];
+  }
+
+  removeRecipe(recipe: Recipe) {
+    this.savedRecipesService.removeRecipe(recipe);
+    this.savedRecipes = this.savedRecipesService.getSavedRecipes();
   }
 
   getIngredients(recipe: Recipe): string[] {
