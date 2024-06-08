@@ -14,8 +14,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class FridgeComponent {
   
-  testIngredient:Ingredient= new Ingredient("carrot", "a long carrot", "vegetable", 10, new Date("11-10-24"));
-  allIngredients:Ingredient[] = [this.testIngredient];
+  //testIngredient:Ingredient= new Ingredient("carrot", "a long carrot", "vegetable", 10, new Date("11-10-24"));
+  allIngredients:Ingredient[] = [];
 
   //temporary variables for form input
   name: string = "";
@@ -23,6 +23,8 @@ export class FridgeComponent {
   type: string = "";
   exDate:string = "";
   amount:number = 0;
+  //stores current selected
+  selected:Ingredient|null = null; 
   
   
 
@@ -36,15 +38,10 @@ export class FridgeComponent {
     this.allIngredients.push(item);
   }
 
-  removeIngredient(item:Ingredient) //removes an ingredient from the fridge
+  removeIngredient(index:number) //removes an ingredient from the fridge
   {
-    for(let i =0; i < this.allIngredients.length; i++)
-      {
-        if(this.allIngredients.at(i)?.ingredientName == item.ingredientName)
-        {
-          delete this.allIngredients[i];
-        }  
-      }
+    
+    this.allIngredients.splice(index, 1);
   }
 
 }

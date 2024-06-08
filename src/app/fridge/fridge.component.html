@@ -6,12 +6,16 @@
         
         <div class="col" style="border: 5px solid grey">
             <h2> Your Fridge</h2>
-            <div *ngFor=" let inData of allIngredients"> 
-                <div class="card mb-3" style= "width: 30 rem">
+            <div *ngFor=" let inData of allIngredients; index as i"> 
+                <div class="card mb-3" (click)= "selected = inData"style= "width: 30 rem">
                     <div class="card-body">
                         <h5 class = "card-text"> {{inData.ingredientName}} <span class="amount"> x{{inData.inventoryAmount}}</span></h5>
                         <p class="card-text"><b>Expires: {{inData.expirationDate.toDateString()}}</b> </p>
-                        <footer><button type="button" class="btn btn-outline-danger">Remove</button> <button type="button" class="btn btn-outline-info"> Edit </button></footer>
+                        <footer>
+                            <button type="button" class="btn btn-outline-danger" (click)="removeIngredient(i)">Remove</button> 
+                            <button type="button" class="btn btn-outline-info"> Edit </button>
+                        </footer>
+
                     </div>
                 </div>
             </div>
@@ -21,7 +25,7 @@
         <div class="col"> 
             <div class="container" style="border: 5px solid brown">
                 <h2> Item details</h2>
-                <p> details here</p>
+                <p> {{(selected==null?"nothing here":selected.details)}}</p>
 
                 <h2> Add Item</h2>
                 <div class="mb-3">
