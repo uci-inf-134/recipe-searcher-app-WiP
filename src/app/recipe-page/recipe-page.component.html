@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <app-navbar></app-navbar>
 
 <h1>Saved Recipes</h1>
@@ -24,7 +26,10 @@
 <div class="modal" [class.show]="isModalOpen" (click)="closeModal($event)">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="closeModal()">&times;</span>
-    <h2>{{ selectedRecipe?.strMeal }}</h2>
+    <h2>
+      {{ selectedRecipe?.strMeal }}
+      <i class="fa fa-microphone" aria-hidden="true"></i>
+    </h2>
     <div class="tab">
       <button class="tablinks" (click)="openTab($event, 'Ingredients')">Ingredients</button>
       <button class="tablinks" (click)="openTab($event, 'Instructions')">Instructions</button>

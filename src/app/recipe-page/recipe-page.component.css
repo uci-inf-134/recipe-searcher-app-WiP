@@ -27,7 +27,7 @@ h1 {
     padding: 10px;
     font-size: 1em;
     margin-top: 10px;
-    background-color: #007bff;
+    background-color: #f0b04f;
     color: white;
     border: none;
     border-radius: 5px;
@@ -37,7 +37,7 @@ h1 {
 
 .go-button:hover,
 .remove-button:hover {
-    background-color: #0056b3;
+    background-color: #d6922c;
 }
 
 .modal {
@@ -70,17 +70,27 @@ h1 {
 }
 
 .tab button {
-    padding: 10px;
+    background-color: #ffcc80;
+    border: none;
+    border-radius: 5px;
+    color: black;
     cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.tab button:hover {
+    background-color: #f0b04f;
+}
+
+.tab button.active {
+    background-color: #d6922c;
 }
 
 .tabcontent {
     display: none;
     padding: 20px;
-}
-
-.tabcontent h3 {
-    margin-top: 0;
 }
 
 .tabcontent ul,

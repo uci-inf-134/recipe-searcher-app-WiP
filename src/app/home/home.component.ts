@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   selectedRecipe: Recipe | null = null;
   selectedRecipeIngredients: string[] = [];
   selectedRecipeInstructions: string[] = [];
+  tags: string[] = ['Chicken', 'Beef', 'Pasta', 'Vegetarian', 'Soup']; // example tags, we'd want to base this off of the fridge list
 
   constructor(
     private recipeSearchService: RecipeSearchService,
@@ -131,5 +132,10 @@ export class HomeComponent implements OnInit {
       (button) => button.textContent === tabName
     );
     tabButton?.classList.add('active');
+  }
+
+  onTagClick(tag: string) {
+    this.query = tag;
+    this.searchByName();
   }
 }
