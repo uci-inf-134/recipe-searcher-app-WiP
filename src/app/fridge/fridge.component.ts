@@ -14,8 +14,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class FridgeComponent {
   
-  //testIngredient:Ingredient= new Ingredient("carrot", "a long carrot", "vegetable", 10, new Date("11-10-24"));
-  allIngredients:Ingredient[] = [];
+  testIngredient:Ingredient= new Ingredient("carrot", "a long carrot", "vegetable", 10, new Date("11-10-24"));
+  allIngredients:Ingredient[] = [this.testIngredient];
 
   //temporary variables for form input
   name: string = "";
