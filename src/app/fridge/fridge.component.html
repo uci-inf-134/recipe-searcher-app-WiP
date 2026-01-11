@@ -7,7 +7,7 @@
         <div class="col" style="border: 5px solid grey">
             <h2> Your Fridge</h2>
             <div *ngFor=" let inData of allIngredients; index as i"> 
-                <div class="card mb-3" (click)= "selected = inData"style= "width: 30 rem">
+                <div class="card mb-3" [ngClass]="{'border':true, 'border-info':inData==selected,'border-5':true}" (click)= "selected = inData" style= "width: 30 rem">
                     <div class="card-body">
                         <h5 class = "card-text"> {{inData.ingredientName}} <span class="amount"> x{{inData.inventoryAmount}}</span></h5>
                         <p class="card-text"><b>Expires: {{inData.expirationDate.toDateString()}}</b> </p>
@@ -47,22 +47,26 @@
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" (click) = "type='veggie'" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="veggie">
                     <label class="form-check-label" for="inlineRadio1">Veggie</label>
-                  </div>
-                  <div class="form-check form-check-inline">
+                </div>
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" (click) ="type='meat'"type="radio" name="inlineRadioOptions" id="inlineRadio2" value="meat">
                     <label class="form-check-label" for="inlineRadio2">Meat</label>
-                  </div>
-                  <div class="form-check form-check-inline">
+                </div>
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" (click)="type='fish'" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="fish">
                     <label class="form-check-label" for="inlineRadio3">Fish</label>
-                  </div>
-                  <div class="form-check form-check-inline">
+                </div>
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" (click)="type='fruit'"type="radio" name="inlineRadioOptions" id="inlineRadio4" value="fruit">
                     <label class="form-check-label" for="inlineRadio3">Fruit</label>
-                  </div>
-                  <div class="form-check form-check-inline">
+                </div>
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" (click)= "type='drink'"type="radio" name="inlineRadioOptions" id="inlineRadio5" value="drink">
                     <label class="form-check-label" for="inlineRadio3">Drink</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" (click)= "type='other'"type="radio" name="inlineRadioOptions" id="inlineRadio6" value="other">
+                    <label class="form-check-label" for="inlineRadio3">Other</label>
                 </div>
                 <div class="mb-3">
                     <label for="ItemAmount" class="form-label">Details</label>
